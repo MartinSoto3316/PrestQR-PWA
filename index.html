@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111214">
+    <title>PrestQR · Administrador</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link href="app.css" rel="stylesheet">
+</head>
+<body>
+<div class="app">
+
+    <!-- ===================== LOGIN ===================== -->
+    <section class="pantalla" id="login">
+        <div class="login">
+            <img src="pinguino del linux.png" alt="Logo PrestQR" class="login-logo">
+            <h1>PrestQR</h1>
+            <p class="texto-suave">Préstamo de equipos con código QR</p>
+
+            <form class="formulario" id="form-login">
+                <label class="campo">
+                    <span>Correo</span>
+                    <input type="email" id="login-correo" placeholder="correo@uts.edu.mx" autocomplete="username" required>
+                </label>
+                <label class="campo">
+                    <span>Contraseña</span>
+                    <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+                </label>
+                <button type="submit" class="boton boton-principal">Iniciar sesión</button>
+            </form>
+            <p class="nota-demo">Administrador o alumno: la app abre la vista según la cuenta.</p>
+        </div>
+    </section>
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <section class="pantalla" id="dashboard">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-dashboard"/></svg> Dashboard</h1>
+            <a href="#login" class="boton-icono" title="Cerrar sesión"><svg class="icono"><use href="#i-salir"/></svg></a>
+        </header>
+
+        <p class="saludo">Hola, <strong>Administrador</strong></p>
+
+        <div class="estadisticas">
+            <div class="tarjeta estadistica"><span>Equipos</span><strong>40</strong></div>
+            <div class="tarjeta estadistica"><span>Disponibles</span><strong>31</strong></div>
+            <div class="tarjeta estadistica"><span>Prestados</span><strong>9</strong></div>
+            <div class="tarjeta estadistica"><span>Vencidos</span><strong class="rojo">2</strong></div>
+        </div>
+
+        <a href="#escanear" class="boton boton-principal boton-con-icono">
+            <svg class="icono"><use href="#i-qr"/></svg> Escanear equipo
+        </a>
+
+        <div class="titulo-seccion">
+            <h2>Préstamos recientes</h2>
+            <a href="#prestamos">Ver todos</a>
+        </div>
+        <div class="lista" id="lista-recientes"></div>
+    </section>
+
+    <!-- ===================== ESCANEAR QR ===================== -->
+    <section class="pantalla" id="escanear">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-qr"/></svg> Escanear equipo</h1>
+        </header>
+
+        <div class="visor">
+            <div class="visor-marco">
+                <svg class="icono icono-grande"><use href="#i-qr"/></svg>
+                <div class="visor-linea"></div>
+            </div>
+        </div>
+        <p class="texto-centro texto-suave">Apunta la cámara al QR pegado en el equipo</p>
+
+        <form class="codigo-manual" id="form-codigo">
+            <input type="text" id="codigo-manual" placeholder="Ej. LAP-015" autocomplete="off">
+            <button type="submit" class="boton boton-secundario">Buscar</button>
+        </form>
+
+        <div class="demo">
+            <p class="nota-demo">Simulación del escaneo:</p>
+            <a href="#prestamo" class="boton boton-secundario">Equipo disponible</a>
+            <a href="#devolucion" class="boton boton-secundario">Equipo prestado</a>
+        </div>
+    </section>
+
+    <!-- ===================== REGISTRAR PRÉSTAMO ===================== -->
+    <section class="pantalla" id="prestamo">
+        <header class="barra">
+            <h1><a href="#escanear" class="volver"><svg class="icono"><use href="#i-atras"/></svg></a> Registrar préstamo</h1>
+        </header>
+
+        <div class="tarjeta equipo-resumen">
+            <div>
+                <strong>Laptop #015</strong>
+                <span class="texto-suave">LAP-015 · Dell Latitude 3420</span>
+            </div>
+            <span class="etiqueta disponible">Disponible</span>
+        </div>
+
+        <form class="formulario" id="form-prestamo">
+            <label class="campo">
+                <span>Alumno</span>
+                <input type="text" list="alumnos-opciones" placeholder="Buscar por nombre o matrícula" required>
+                <datalist id="alumnos-opciones"></datalist>
+            </label>
+            <label class="campo">
+                <span>Fecha de préstamo</span>
+                <input type="text" id="fecha-prestamo" readonly>
+            </label>
+            <label class="campo">
+                <span>Fecha límite de devolución</span>
+                <input type="date" id="fecha-limite" required>
+            </label>
+            <label class="campo">
+                <span>Observaciones <em>(opcional)</em></span>
+                <textarea rows="3" placeholder="Ej. Incluye cargador"></textarea>
+            </label>
+            <button type="submit" class="boton boton-principal">Confirmar préstamo</button>
+        </form>
+    </section>
+
+    <!-- ===================== CONFIRMAR DEVOLUCIÓN ===================== -->
+    <section class="pantalla" id="devolucion">
+        <header class="barra">
+            <h1><a href="#escanear" class="volver"><svg class="icono"><use href="#i-atras"/></svg></a> Devolución</h1>
+        </header>
+
+        <div class="tarjeta equipo-resumen">
+            <div>
+                <strong>Cámara #002</strong>
+                <span class="texto-suave">CAM-002 · Canon EOS Rebel T7</span>
+            </div>
+            <span class="etiqueta prestado">Prestado</span>
+        </div>
+
+        <h2 class="subtitulo">Préstamo activo</h2>
+        <div class="datos">
+            <div class="dato"><span>Alumno</span><strong>Martín Soto</strong></div>
+            <div class="dato"><span>Matrícula</span><strong>A0001</strong></div>
+            <div class="dato"><span>Prestado</span><strong>05/11/2026</strong></div>
+            <div class="dato"><span>Fecha límite</span><strong>08/11/2026</strong></div>
+            <div class="dato"><span>Observaciones</span><strong>Incluye cargador</strong></div>
+        </div>
+        <p class="aviso">No se puede crear otro préstamo mientras el equipo siga prestado.</p>
+
+        <button type="button" class="boton boton-principal" id="confirmar-devolucion">Confirmar devolución</button>
+    </section>
+
+    <!-- ===================== EQUIPOS (datos reales de la API) ===================== -->
+    <section class="pantalla" id="equipos">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-equipo"/></svg> Equipos</h1>
+            <a href="#equipo-nuevo" class="boton-icono" title="Nuevo equipo"><svg class="icono"><use href="#i-mas"/></svg></a>
+        </header>
+
+        <input type="search" class="buscador" id="buscar-equipo" placeholder="Buscar por nombre o código">
+        <div class="filtros" id="filtros-equipos">
+            <button type="button" class="filtro activo" data-estado="">Todos</button>
+            <button type="button" class="filtro" data-estado="disponible">Disponibles</button>
+            <button type="button" class="filtro" data-estado="prestado">Prestados</button>
+        </div>
+
+        <div class="lista" id="lista"></div>
+    </section>
+
+    <!-- ===================== DETALLE DE EQUIPO ===================== -->
+    <section class="pantalla" id="equipo-detalle">
+        <header class="barra">
+            <h1><a href="#equipos" class="volver"><svg class="icono"><use href="#i-atras"/></svg></a> Detalle del equipo</h1>
+        </header>
+
+        <div class="tarjeta qr-tarjeta">
+            <svg class="icono qr-imagen"><use href="#i-qr"/></svg>
+            <strong id="detalle-codigo">—</strong>
+            <span class="texto-suave">Código para imprimir y pegar en el equipo</span>
+        </div>
+
+        <div class="datos">
+            <div class="dato"><span>Nombre</span><strong id="detalle-nombre">—</strong></div>
+            <div class="dato"><span>Modelo</span><strong id="detalle-modelo">—</strong></div>
+            <div class="dato"><span>Estado</span><strong id="detalle-estado">—</strong></div>
+        </div>
+
+        <div class="acciones">
+            <button type="button" class="boton boton-secundario" data-toast="Descarga de QR (simulada)">Descargar QR</button>
+            <button type="button" class="boton boton-secundario" data-toast="Edición de equipo (simulada)">Editar</button>
+        </div>
+    </section>
+
+    <!-- ===================== NUEVO EQUIPO ===================== -->
+    <section class="pantalla" id="equipo-nuevo">
+        <header class="barra">
+            <h1><a href="#equipos" class="volver"><svg class="icono"><use href="#i-atras"/></svg></a> Nuevo equipo</h1>
+        </header>
+
+        <form class="formulario" data-guardar="Equipo registrado (simulado)" data-destino="#equipos">
+            <label class="campo">
+                <span>Código QR</span>
+                <input type="text" placeholder="Ej. LAP-016" required>
+            </label>
+            <label class="campo">
+                <span>Nombre</span>
+                <input type="text" placeholder="Ej. Laptop #016" required>
+            </label>
+            <label class="campo">
+                <span>Modelo <em>(opcional)</em></span>
+                <input type="text" placeholder="Ej. Dell Latitude 3420">
+            </label>
+            <button type="submit" class="boton boton-principal">Guardar equipo</button>
+        </form>
+    </section>
+
+    <!-- ===================== PRÉSTAMOS ===================== -->
+    <section class="pantalla" id="prestamos">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-lista"/></svg> Préstamos</h1>
+        </header>
+
+        <div class="filtros" id="filtros-prestamos">
+            <button type="button" class="filtro activo" data-tipo="activo">Activos</button>
+            <button type="button" class="filtro" data-tipo="vencido">Vencidos</button>
+            <button type="button" class="filtro" data-tipo="completado">Historial</button>
+        </div>
+
+        <div class="lista" id="lista-prestamos"></div>
+    </section>
+
+    <!-- ===================== ALUMNOS ===================== -->
+    <section class="pantalla" id="alumnos">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-alumnos"/></svg> Alumnos</h1>
+        </header>
+
+        <input type="search" class="buscador" id="buscar-alumno" placeholder="Buscar por nombre o matrícula">
+        <div class="lista" id="lista-alumnos"></div>
+    </section>
+
+    <!-- ===================== DETALLE DE ALUMNO ===================== -->
+    <section class="pantalla" id="alumno-detalle">
+        <header class="barra">
+            <h1><a href="#alumnos" class="volver"><svg class="icono"><use href="#i-atras"/></svg></a> Alumno</h1>
+        </header>
+
+        <div class="perfil">
+            <div class="avatar avatar-grande" id="alumno-iniciales">—</div>
+            <strong id="alumno-nombre">—</strong>
+            <span class="texto-suave" id="alumno-matricula">—</span>
+        </div>
+
+        <div class="datos">
+            <div class="dato"><span>Carrera</span><strong id="alumno-carrera">—</strong></div>
+            <div class="dato"><span>Correo</span><strong id="alumno-correo">—</strong></div>
+            <div class="dato"><span>Cuenta</span><strong>Activa</strong></div>
+        </div>
+
+        <h2 class="subtitulo">Historial de préstamos</h2>
+        <div class="lista" id="alumno-historial"></div>
+    </section>
+
+    <!-- =====================================================================
+         VISTA DEL ALUMNO
+         ===================================================================== -->
+
+    <!-- ===================== MIS PRÉSTAMOS ===================== -->
+    <section class="pantalla" id="mis-prestamos">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-lista"/></svg> Mis préstamos</h1>
+        </header>
+
+        <p class="saludo">Hola, <strong>Martín</strong></p>
+
+        <div class="estadisticas">
+            <div class="tarjeta estadistica"><span>Activos</span><strong id="total-activos">0</strong></div>
+            <div class="tarjeta estadistica"><span>Vencidos</span><strong class="rojo" id="total-vencidos">0</strong></div>
+        </div>
+
+        <h2 class="subtitulo">Préstamos activos</h2>
+        <div class="lista" id="lista-mis-activos"></div>
+
+        <h2 class="subtitulo">Historial</h2>
+        <div class="lista" id="lista-mi-historial"></div>
+    </section>
+
+    <!-- ===================== DETALLE DE MI PRÉSTAMO ===================== -->
+    <section class="pantalla" id="mi-prestamo">
+        <header class="barra">
+            <h1><a href="#mis-prestamos" class="volver"><svg class="icono"><use href="#i-atras"/></svg></a> Préstamo</h1>
+        </header>
+
+        <div class="tarjeta equipo-resumen">
+            <div>
+                <strong id="mi-equipo">—</strong>
+                <span class="texto-suave" id="mi-codigo">—</span>
+            </div>
+            <span class="etiqueta" id="mi-estado">—</span>
+        </div>
+
+        <div class="datos">
+            <div class="dato"><span>Fecha de préstamo</span><strong id="mi-fecha-prestamo">—</strong></div>
+            <div class="dato"><span>Fecha límite</span><strong id="mi-fecha-limite">—</strong></div>
+            <div class="dato" id="mi-dato-devolucion"><span>Devuelto</span><strong id="mi-fecha-devolucion">—</strong></div>
+            <div class="dato"><span>Observaciones</span><strong id="mi-observaciones">—</strong></div>
+        </div>
+        <p class="aviso" id="mi-aviso">Entrega el equipo al administrador del laboratorio antes de la fecha límite.</p>
+    </section>
+
+    <!-- ===================== NOTIFICACIONES ===================== -->
+    <section class="pantalla" id="notificaciones">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-campana"/></svg> Notificaciones</h1>
+        </header>
+
+        <div class="lista" id="lista-notificaciones"></div>
+    </section>
+
+    <!-- ===================== PERFIL ===================== -->
+    <section class="pantalla" id="perfil">
+        <header class="barra">
+            <h1><svg class="icono"><use href="#i-usuario"/></svg> Perfil</h1>
+        </header>
+
+        <div class="perfil">
+            <div class="avatar avatar-grande">MS</div>
+            <strong>Martín Soto</strong>
+            <span class="texto-suave">A0001</span>
+        </div>
+
+        <div class="datos">
+            <div class="dato"><span>Carrera</span><strong>Ingeniería en Software</strong></div>
+            <div class="dato"><span>Correo</span><strong>alumno@gmail.com</strong></div>
+            <label class="dato dato-interruptor">
+                <span>Notificaciones</span>
+                <input type="checkbox" class="interruptor" id="interruptor-push" checked>
+            </label>
+        </div>
+        <p class="aviso">Recibirás avisos cuando se registre un préstamo, un día antes de la fecha límite y si el préstamo se vence.</p>
+
+        <a href="#login" class="boton boton-secundario">Cerrar sesión</a>
+    </section>
+
+    <!-- ===================== NAVEGACIÓN INFERIOR (ADMINISTRADOR) ===================== -->
+    <nav class="navegacion" id="navegacion">
+        <a href="#dashboard" data-tab="dashboard"><svg class="icono"><use href="#i-dashboard"/></svg><span>Inicio</span></a>
+        <a href="#escanear" data-tab="escanear"><svg class="icono"><use href="#i-qr"/></svg><span>Escanear</span></a>
+        <a href="#equipos" data-tab="equipos"><svg class="icono"><use href="#i-equipo"/></svg><span>Equipos</span></a>
+        <a href="#prestamos" data-tab="prestamos"><svg class="icono"><use href="#i-lista"/></svg><span>Préstamos</span></a>
+        <a href="#alumnos" data-tab="alumnos"><svg class="icono"><use href="#i-alumnos"/></svg><span>Alumnos</span></a>
+    </nav>
+
+    <!-- ===================== NAVEGACIÓN INFERIOR (ALUMNO) ===================== -->
+    <nav class="navegacion" id="navegacion-alumno" hidden>
+        <a href="#mis-prestamos" data-tab="mis-prestamos"><svg class="icono"><use href="#i-lista"/></svg><span>Mis préstamos</span></a>
+        <a href="#notificaciones" data-tab="notificaciones">
+            <span class="icono-con-globo">
+                <svg class="icono"><use href="#i-campana"/></svg>
+                <span class="globo" id="globo-notificaciones"></span>
+            </span>
+            <span>Notificaciones</span>
+        </a>
+        <a href="#perfil" data-tab="perfil"><svg class="icono"><use href="#i-usuario"/></svg><span>Perfil</span></a>
+    </nav>
+
+    <div id="sin-conexion" class="sin-conexion" hidden>
+        Sin conexión a internet. Se muestra la última información guardada.
+    </div>
+    <div id="toast" class="toast" hidden></div>
+</div>
+
+<!-- Íconos (se usan con <svg><use href="#i-..."/></svg>) -->
+<svg width="0" height="0" style="position:absolute">
+    <symbol id="i-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h3M21 17v4h-1"/></symbol>
+    <symbol id="i-equipo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
+    <symbol id="i-lista" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><rect x="3" y="4" width="3" height="4" rx=".5"/><rect x="3" y="10" width="3" height="4" rx=".5"/><rect x="3" y="16" width="3" height="4" rx=".5"/></symbol>
+    <symbol id="i-alumnos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.8.7 3 2.5 3.5 5.2"/></symbol>
+    <symbol id="i-atras" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-mas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-campana" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-usuario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.2-6 8-6s7 2 8 6"/></symbol>
+    <symbol id="i-salir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4"/></symbol>
+</svg>
+
+<script src="app.js"></script>
+</body>
+</html>

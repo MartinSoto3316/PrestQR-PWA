@@ -1,0 +1,673 @@
+/* ---------- Colores del diseño (tema oscuro, igual a los mockups) ---------- */
+:root{
+    --fondo: #0d0e10;
+    --app: #151619;
+    --tarjeta: #1d1e22;
+    --borde: #2b2c31;
+    --texto: #f2f2f3;
+    --texto-suave: #9c9da3;
+    --acento: #5b8def;
+    --verde: #3ecf6e;
+    --verde-fondo: rgba(62, 207, 110, 0.14);
+    --naranja: #f0a43a;
+    --naranja-fondo: rgba(240, 164, 58, 0.14);
+    --rojo: #ef5b5b;
+    --rojo-fondo: rgba(239, 91, 91, 0.14);
+    --alto-nav: 64px;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background-color: var(--fondo);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 15px;
+}
+
+/* En celular ocupa toda la pantalla; en computadora se ve como un teléfono centrado */
+.app{
+    position: relative;
+    max-width: 480px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background-color: var(--app);
+}
+
+a{
+    color: var(--acento);
+    text-decoration: none;
+}
+
+/* ---------- Pantallas: solo se muestra la activa ---------- */
+.pantalla{
+    display: none;
+    padding: 16px 16px calc(var(--alto-nav) + 24px);
+}
+.pantalla.activa{
+    display: block;
+}
+#login.activa{
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    padding-bottom: 16px;
+}
+
+/* ---------- Íconos ---------- */
+.icono{
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+.icono-grande{
+    width: 64px;
+    height: 64px;
+    color: var(--acento);
+}
+
+/* ---------- Barra superior de cada pantalla ---------- */
+.barra{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.barra h1{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 20px;
+}
+.volver{
+    display: flex;
+    color: var(--texto);
+}
+.boton-icono{
+    display: flex;
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--texto);
+    background-color: var(--tarjeta);
+    border: 1px solid var(--borde);
+}
+
+/* ---------- Textos ---------- */
+.texto-suave{
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+.texto-centro{
+    text-align: center;
+}
+.rojo{
+    color: var(--rojo);
+}
+.saludo{
+    margin: 0 0 16px;
+    color: var(--texto-suave);
+}
+.saludo strong{
+    color: var(--texto);
+}
+.subtitulo{
+    margin: 20px 0 10px;
+    font-size: 16px;
+}
+.titulo-seccion{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 24px 0 10px;
+}
+.titulo-seccion h2{
+    margin: 0;
+    font-size: 16px;
+}
+.titulo-seccion a{
+    font-size: 14px;
+}
+.nota-demo{
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: var(--texto-suave);
+    text-align: center;
+}
+.aviso{
+    margin: 14px 0 20px;
+    font-size: 14px;
+    color: var(--texto-suave);
+}
+
+/* ---------- Tarjetas ---------- */
+.tarjeta{
+    background-color: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 14px 16px;
+}
+
+.estadisticas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.estadistica span{
+    display: block;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+.estadistica strong{
+    display: block;
+    margin-top: 4px;
+    font-size: 28px;
+}
+
+.equipo-resumen{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.equipo-resumen strong{
+    display: block;
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+/* ---------- Listas (equipos, préstamos, alumnos) ---------- */
+.lista{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.fila{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background-color: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: var(--texto);
+}
+a.fila:active,
+button.fila:active{
+    background-color: var(--borde);
+}
+.fila-texto{
+    min-width: 0;
+}
+.fila-texto strong{
+    display: block;
+    margin-bottom: 2px;
+}
+.fila-texto span{
+    display: block;
+    color: var(--texto-suave);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.fila-con-avatar{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+.mensaje{
+    padding: 24px 16px;
+    text-align: center;
+    color: var(--texto-suave);
+    background-color: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+}
+.mensaje.error{
+    color: var(--rojo);
+}
+
+/* ---------- Etiquetas de estado ---------- */
+.etiqueta{
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.etiqueta.disponible,
+.etiqueta.completado{
+    color: var(--verde);
+    background-color: var(--verde-fondo);
+}
+.etiqueta.prestado,
+.etiqueta.activo{
+    color: var(--naranja);
+    background-color: var(--naranja-fondo);
+}
+.etiqueta.vencido{
+    color: var(--rojo);
+    background-color: var(--rojo-fondo);
+}
+
+/* ---------- Avatar con iniciales ---------- */
+.avatar{
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(91, 141, 239, 0.18);
+    color: var(--acento);
+    font-weight: 700;
+    font-size: 14px;
+}
+.avatar-grande{
+    width: 72px;
+    height: 72px;
+    font-size: 24px;
+}
+.perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+.perfil strong{
+    font-size: 18px;
+}
+
+/* ---------- Pares "dato: valor" ---------- */
+.datos{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.dato{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    background-color: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+.dato span{
+    color: var(--texto-suave);
+}
+.dato strong{
+    text-align: right;
+}
+
+/* ---------- Botones ---------- */
+.boton{
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font: inherit;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+}
+.boton-principal{
+    background-color: #ffffff;
+    color: #111214;
+}
+.boton-secundario{
+    background-color: var(--tarjeta);
+    border-color: var(--borde);
+    color: var(--texto);
+}
+.boton-con-icono{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.acciones{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ---------- Formularios ---------- */
+.formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.campo{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.campo span{
+    font-size: 14px;
+    color: var(--texto-suave);
+}
+.campo em{
+    font-style: normal;
+    opacity: 0.7;
+}
+input,
+textarea{
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--borde);
+    background-color: var(--tarjeta);
+    color: var(--texto);
+    font: inherit;
+    color-scheme: dark;
+}
+input:focus,
+textarea:focus{
+    outline: none;
+    border-color: var(--acento);
+}
+input[readonly]{
+    color: var(--texto-suave);
+}
+.formulario .boton{
+    margin-top: 8px;
+}
+
+.buscador{
+    margin-bottom: 10px;
+}
+.filtros{
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    overflow-x: auto;
+}
+.filtro{
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--borde);
+    background-color: var(--tarjeta);
+    color: var(--texto-suave);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+.filtro.activo{
+    background-color: var(--acento);
+    border-color: var(--acento);
+    color: #ffffff;
+}
+
+/* ---------- Login ---------- */
+.login{
+    width: 100%;
+    text-align: center;
+}
+.login-logo{
+    width: 88px;
+    height: 88px;
+}
+.login h1{
+    margin: 12px 0 4px;
+    font-size: 28px;
+}
+.login .formulario{
+    margin-top: 28px;
+    text-align: left;
+}
+
+/* ---------- Escanear QR ---------- */
+.visor{
+    display: flex;
+    justify-content: center;
+    margin: 24px 0 16px;
+}
+.visor-marco{
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border: 2px dashed var(--acento);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: rgba(91, 141, 239, 0.06);
+}
+/* Línea que simula el escaneo */
+.visor-linea{
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    height: 2px;
+    background-color: var(--acento);
+    box-shadow: 0 0 12px var(--acento);
+    animation: escanear 2s ease-in-out infinite alternate;
+}
+@keyframes escanear{
+    from{ top: 14px; }
+    to{ top: calc(100% - 16px); }
+}
+.codigo-manual{
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+.codigo-manual .boton{
+    width: auto;
+    padding: 12px 18px;
+}
+.demo{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid var(--borde);
+}
+.demo .nota-demo{
+    margin: 0 0 4px;
+}
+
+/* ---------- QR del equipo ---------- */
+.qr-tarjeta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    padding: 20px;
+}
+.qr-imagen{
+    width: 140px;
+    height: 140px;
+    padding: 12px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: #111214;
+}
+.qr-tarjeta strong{
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 18px;
+}
+
+/* ---------- Navegación inferior ---------- */
+.navegacion{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: var(--alto-nav);
+    display: flex;
+    background-color: var(--app);
+    border-top: 1px solid var(--borde);
+    z-index: 10;
+}
+.navegacion[hidden]{
+    display: none;
+}
+.navegacion a{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: var(--texto-suave);
+    font-size: 11px;
+}
+.navegacion a.activo{
+    color: var(--acento);
+}
+
+/* ---------- Avisos flotantes ---------- */
+.sin-conexion{
+    position: fixed;
+    bottom: var(--alto-nav);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    padding: 12px 16px;
+    background-color: #b71c1c;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    z-index: 11;
+}
+.sin-conexion[hidden]{
+    display: none;
+}
+.toast{
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: calc(100% - 32px);
+    padding: 12px 18px;
+    border-radius: 12px;
+    background-color: var(--verde);
+    color: #0d0e10;
+    font-weight: 600;
+    z-index: 20;
+}
+.toast.error{
+    background-color: var(--rojo);
+    color: #ffffff;
+}
+.toast[hidden]{
+    display: none;
+}
+
+/* ---------- Vista del alumno ---------- */
+/* Globo con el número de notificaciones nuevas */
+.icono-con-globo{
+    position: relative;
+    display: flex;
+}
+.globo{
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+    background-color: var(--rojo);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+}
+.globo[hidden]{
+    display: none;
+}
+
+/* Notificaciones: punto de color según el tipo */
+.notificacion{
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.notificacion.nueva{
+    border-color: var(--acento);
+}
+.notificacion p{
+    margin: 2px 0 6px;
+    font-size: 14px;
+    color: var(--texto);
+}
+.notificacion-tipo{
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    border-radius: 50%;
+}
+.notificacion-tipo.registrado{
+    background-color: var(--acento);
+}
+.notificacion-tipo.recordatorio{
+    background-color: var(--naranja);
+}
+.notificacion-tipo.vencido{
+    background-color: var(--rojo);
+}
+.notificacion-tipo.devuelto{
+    background-color: var(--verde);
+}
+
+/* Interruptor (notificaciones push en el perfil) */
+.dato-interruptor{
+    align-items: center;
+    cursor: pointer;
+}
+.dato[hidden]{
+    display: none;
+}
+.interruptor{
+    appearance: none;
+    flex-shrink: 0;
+    width: 44px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 13px;
+    background-color: var(--borde);
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.interruptor::after{
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: transform 0.2s;
+}
+.interruptor:checked{
+    background-color: var(--acento);
+}
+.interruptor:checked::after{
+    transform: translateX(18px);
+}

@@ -42,15 +42,11 @@ a{
     text-decoration: none;
 }
 
-/* ---------- Pantallas: solo se muestra la activa ---------- */
+/* ---------- Pantallas (cada una es una vista de Vue Router) ---------- */
 .pantalla{
-    display: none;
     padding: 16px 16px calc(var(--alto-nav) + 24px);
 }
-.pantalla.activa{
-    display: block;
-}
-#login.activa{
+.pantalla-login{
     display: flex;
     min-height: 100vh;
     align-items: center;
@@ -94,6 +90,12 @@ a{
     color: var(--texto);
     background-color: var(--tarjeta);
     border: 1px solid var(--borde);
+    cursor: pointer;
+}
+.boton-icono:disabled,
+.boton:disabled{
+    opacity: 0.5;
+    cursor: default;
 }
 
 /* ---------- Textos ---------- */

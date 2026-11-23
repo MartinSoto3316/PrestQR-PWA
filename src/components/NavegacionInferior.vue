@@ -25,7 +25,12 @@ const pestanas = computed(() => (auth.esAdmin ? pestanasAdmin : pestanasAlumno))
 </script>
 
 <template>
+  <!-- En celular y tablet es la barra inferior; en computadora, el menú lateral (ver app.css) -->
   <nav class="navegacion">
+    <div class="navegacion-marca">
+      <span class="logo" aria-hidden="true"></span>
+      <span>PrestQR</span>
+    </div>
     <RouterLink
       v-for="p in pestanas"
       :key="p.ruta"

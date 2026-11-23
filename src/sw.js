@@ -29,7 +29,7 @@ self.addEventListener('push', (event) => {
   event.waitUntil(
     self.registration.showNotification(datos.titulo ?? 'PrestQR', {
       body: datos.cuerpo ?? '',
-      icon: '/logo.png',
+      icon: '/qr-code.png',
       data: { url: datos.url ?? '/' },
     }),
   )

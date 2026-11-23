@@ -22,7 +22,7 @@ const conNavegacion = computed(() => !route.meta.publica && route.name !== undef
 </script>
 
 <template>
-  <div class="app">
+  <div class="app" :class="{ 'con-menu': conNavegacion }">
     <RouterView />
     <NavegacionInferior v-if="conNavegacion" />
 

@@ -29,7 +29,7 @@ async function entrar() {
 <template>
   <section class="pantalla pantalla-login">
     <div class="login">
-      <img src="/logo.png" alt="Logo PrestQR" class="login-logo">
+      <span class="logo login-logo" role="img" aria-label="Logo PrestQR"></span>
       <h1>PrestQR</h1>
       <p class="texto-suave">Préstamo de equipos con código QR</p>
 

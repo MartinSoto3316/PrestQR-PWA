@@ -41,10 +41,10 @@ export default defineConfig(({ mode }) => {
           lang: 'es',
           start_url: '/',
           display: 'standalone',
-          background_color: '#151619',
-          theme_color: '#111214',
+          background_color: '#ffffff',
+          theme_color: '#1647a3',
           icons: [
-            { src: 'logo.png', sizes: '128x128', type: 'image/png' },
+            { src: 'qr-code.png', sizes: '512x512', type: 'image/png' },
           ],
         },
       }),

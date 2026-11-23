@@ -1,18 +1,22 @@
-/* ---------- Colores del diseño (tema oscuro, igual a los mockups) ---------- */
+/* ---------- Colores del diseño (tema claro: azul y blanco) ---------- */
 :root{
-    --fondo: #0d0e10;
-    --app: #151619;
-    --tarjeta: #1d1e22;
-    --borde: #2b2c31;
-    --texto: #f2f2f3;
-    --texto-suave: #9c9da3;
-    --acento: #5b8def;
-    --verde: #3ecf6e;
-    --verde-fondo: rgba(62, 207, 110, 0.14);
-    --naranja: #f0a43a;
-    --naranja-fondo: rgba(240, 164, 58, 0.14);
-    --rojo: #ef5b5b;
-    --rojo-fondo: rgba(239, 91, 91, 0.14);
+    --fondo: #e8eef9;          /* franjas laterales en tablet */
+    --app: #f4f7fd;            /* fondo de las pantallas: blanco azulado */
+    --tarjeta: #ffffff;
+    --borde: #d9e2f2;
+    --texto: #13233f;          /* azul marino casi negro */
+    --texto-suave: #5d6b85;
+    --acento: #1f5fd1;         /* azul principal */
+    --acento-oscuro: #1647a3;  /* barra de navegación y login */
+    --acento-fondo: rgba(31, 95, 209, 0.10);
+    --sombra: 0 1px 3px rgba(19, 35, 63, 0.08);
+    /* Colores de estado: más oscuros que en el tema oscuro para leerse bien sobre blanco */
+    --verde: #18864a;
+    --verde-fondo: rgba(24, 134, 74, 0.12);
+    --naranja: #b25f00;
+    --naranja-fondo: rgba(240, 150, 30, 0.16);
+    --rojo: #cf3030;
+    --rojo-fondo: rgba(207, 48, 48, 0.10);
     --alto-nav: 64px;
 }
 
@@ -46,11 +50,24 @@ a{
 .pantalla{
     padding: 16px 16px calc(var(--alto-nav) + 24px);
 }
+/* Login: fondo azul con la tarjeta blanca al centro */
 .pantalla-login{
     display: flex;
     min-height: 100vh;
     align-items: center;
     padding-bottom: 16px;
+    background: linear-gradient(160deg, var(--acento) 0%, var(--acento-oscuro) 100%);
+}
+
+/* ---------- Sombra suave para que el blanco se distinga del fondo ---------- */
+.tarjeta,
+.fila,
+.dato,
+.mensaje,
+.boton-secundario,
+.boton-icono,
+.filtro{
+    box-shadow: var(--sombra);
 }
 
 /* ---------- Íconos ---------- */
@@ -269,7 +286,7 @@ button.fila:active{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(91, 141, 239, 0.18);
+    background-color: var(--acento-fondo);
     color: var(--acento);
     font-weight: 700;
     font-size: 14px;
@@ -325,8 +342,11 @@ button.fila:active{
     cursor: pointer;
 }
 .boton-principal{
-    background-color: #ffffff;
-    color: #111214;
+    background-color: var(--acento);
+    color: #ffffff;
+}
+.boton-principal:hover:not(:disabled){
+    background-color: var(--acento-oscuro);
 }
 .boton-secundario{
     background-color: var(--tarjeta);
@@ -374,7 +394,7 @@ textarea{
     background-color: var(--tarjeta);
     color: var(--texto);
     font: inherit;
-    color-scheme: dark;
+    color-scheme: light;
 }
 input:focus,
 textarea:focus{
@@ -418,10 +438,30 @@ input[readonly]{
 .login{
     width: 100%;
     text-align: center;
+    padding: 28px 22px;
+    border-radius: 20px;
+    background-color: var(--tarjeta);
+    box-shadow: 0 12px 40px rgba(10, 30, 70, 0.30);
+}
+.login h1{
+    color: var(--acento-oscuro);
+}
+/* Logo (qr-code.png): la imagen es de líneas negras sobre fondo transparente,
+   así que se usa como máscara y toma el color del texto (currentColor).
+   Así sirve en azul sobre la tarjeta blanca y en blanco sobre el menú azul. */
+.logo{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask: url("/qr-code.png") center / contain no-repeat;
+    mask: url("/qr-code.png") center / contain no-repeat;
 }
 .login-logo{
     width: 88px;
     height: 88px;
+    color: var(--acento-oscuro);
 }
 .login h1{
     margin: 12px 0 4px;
@@ -448,7 +488,7 @@ input[readonly]{
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: rgba(91, 141, 239, 0.06);
+    background-color: var(--acento-fondo);
 }
 /* Línea que simula el escaneo */
 .visor-linea{
@@ -501,6 +541,7 @@ input[readonly]{
     border-radius: 12px;
     background-color: #ffffff;
     color: #111214;
+    border: 1px solid var(--borde);
 }
 .qr-tarjeta strong{
     font-family: Consolas, "Courier New", monospace;
@@ -517,8 +558,7 @@ input[readonly]{
     max-width: 480px;
     height: var(--alto-nav);
     display: flex;
-    background-color: var(--app);
-    border-top: 1px solid var(--borde);
+    background-color: var(--acento-oscuro);
     z-index: 10;
 }
 .navegacion[hidden]{
@@ -531,11 +571,12 @@ input[readonly]{
     align-items: center;
     justify-content: center;
     gap: 3px;
-    color: var(--texto-suave);
+    color: rgba(255, 255, 255, 0.7);
     font-size: 11px;
 }
 .navegacion a.activo{
-    color: var(--acento);
+    color: #ffffff;
+    font-weight: 600;
 }
 
 /* ---------- Avisos flotantes ---------- */
@@ -565,8 +606,9 @@ input[readonly]{
     padding: 12px 18px;
     border-radius: 12px;
     background-color: var(--verde);
-    color: #0d0e10;
+    color: #ffffff;
     font-weight: 600;
+    box-shadow: 0 4px 14px rgba(19, 35, 63, 0.18);
     z-index: 20;
 }
 .toast.error{
@@ -672,4 +714,147 @@ input[readonly]{
 }
 .interruptor:checked::after{
     transform: translateX(18px);
+}
+
+/* ---------- Marca del menú (solo se ve en computadora) ---------- */
+.navegacion-marca{
+    display: none;
+}
+
+/* =====================================================================
+   DISEÑO RESPONSIVO
+   - Celular (< 768 px): diseño base de arriba, una columna y barra inferior.
+   - Tablet (≥ 768 px): contenido más ancho, listas en 2 columnas, barra inferior.
+   - Computadora (≥ 1024 px): menú lateral fijo y contenido amplio.
+   ===================================================================== */
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px){
+    .app{
+        max-width: 960px;
+    }
+    .navegacion,
+    .sin-conexion{
+        max-width: 960px;
+    }
+    .pantalla{
+        padding: 24px 32px calc(var(--alto-nav) + 32px);
+    }
+
+    /* Listas en dos columnas; los mensajes (vacío, error, cargando) ocupan todo el ancho */
+    .lista{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .lista > .mensaje{
+        grid-column: 1 / -1;
+    }
+
+    .estadisticas{
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .datos{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Los formularios se quedan angostos: un campo de 900 px de ancho es difícil de leer */
+    .formulario,
+    .codigo-manual{
+        max-width: 560px;
+    }
+    .login{
+        max-width: 420px;
+        margin: 0 auto;
+    }
+    .acciones{
+        max-width: 560px;
+    }
+    .navegacion a{
+        font-size: 12px;
+    }
+}
+
+/* ---------- Computadora ---------- */
+@media (min-width: 1024px){
+    :root{
+        --ancho-menu: 240px;
+    }
+    .app{
+        max-width: none;
+    }
+    .app.con-menu{
+        padding-left: var(--ancho-menu);
+    }
+    .pantalla{
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 40px;
+    }
+    /* El fondo azul del login cubre toda la ventana */
+    .pantalla.pantalla-login{
+        max-width: none;
+    }
+    .barra h1{
+        font-size: 24px;
+    }
+
+    .lista{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    /* Pantallas de detalle: tarjeta y datos con el mismo ancho */
+    .datos,
+    .qr-tarjeta,
+    .equipo-resumen,
+    .acciones{
+        max-width: 760px;
+    }
+
+    /* La barra inferior se convierte en menú lateral fijo */
+    .navegacion{
+        top: 0;
+        left: 0;
+        transform: none;
+        width: var(--ancho-menu);
+        max-width: none;
+        height: 100vh;
+        flex-direction: column;
+        gap: 4px;
+        padding: 20px 12px;
+    }
+    .navegacion-marca{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 4px 12px 20px;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .navegacion a{
+        flex: none;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 15px;
+    }
+    .navegacion a:hover{
+        background-color: rgba(255, 255, 255, 0.10);
+        color: #ffffff;
+    }
+    .navegacion a.activo{
+        background-color: rgba(255, 255, 255, 0.18);
+    }
+
+    /* El aviso sin conexión ocupa el área de contenido, a la derecha del menú */
+    .sin-conexion{
+        bottom: 0;
+        left: var(--ancho-menu);
+        transform: none;
+        max-width: none;
+        width: auto;
+        right: 0;
+    }
 }

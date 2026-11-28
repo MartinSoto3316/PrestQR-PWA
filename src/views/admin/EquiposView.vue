@@ -46,10 +46,9 @@ onUnmounted(() => window.removeEventListener('online', cargarEquipos))
   <section class="pantalla">
     <header class="barra">
       <h1><AppIcono nombre="equipo" /> Equipos</h1>
-      <!-- Alta de equipo: pendiente de migrar -->
-      <button type="button" class="boton-icono" title="Nuevo equipo" disabled>
+      <RouterLink :to="{ name: 'equipo-nuevo' }" class="boton-icono" title="Nuevo equipo" aria-label="Nuevo equipo">
         <AppIcono nombre="mas" />
-      </button>
+      </RouterLink>
     </header>
 
     <input v-model="busqueda" type="search" class="buscador" placeholder="Buscar por nombre o código">
@@ -69,7 +68,8 @@ onUnmounted(() => window.removeEventListener('online', cargarEquipos))
     <div class="lista">
       <div v-if="cargando" class="mensaje">Cargando equipos…</div>
       <div v-else-if="error" class="mensaje error">{{ error }}</div>
-      <div v-else-if="equiposFiltrados.length === 0" class="mensaje">No hay equipos registrados.</div>
+      <div v-else-if="equipos.length === 0" class="mensaje">No hay equipos registrados.</div>
+      <div v-else-if="equiposFiltrados.length === 0" class="mensaje">Ningún equipo coincide con la búsqueda o el filtro.</div>
       <template v-else>
         <RouterLink
           v-for="e in equiposFiltrados"

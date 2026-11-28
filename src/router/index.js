@@ -13,6 +13,8 @@ const routes = [
   { path: '/dashboard', name: 'dashboard', component: Pendiente, meta: { rol: 'admin', tab: 'dashboard', titulo: 'Dashboard', icono: 'dashboard' } },
   { path: '/escanear', name: 'escanear', component: Pendiente, meta: { rol: 'admin', tab: 'escanear', titulo: 'Escanear equipo', icono: 'qr' } },
   { path: '/equipos', name: 'equipos', component: () => import('@/views/admin/EquiposView.vue'), meta: { rol: 'admin', tab: 'equipos' } },
+  { path: '/equipos/nuevo', name: 'equipo-nuevo', component: () => import('@/views/admin/EquipoFormularioView.vue'), meta: { rol: 'admin', tab: 'equipos' } },
+  { path: '/equipos/:id/editar', name: 'equipo-editar', component: () => import('@/views/admin/EquipoFormularioView.vue'), props: true, meta: { rol: 'admin', tab: 'equipos' } },
   { path: '/equipos/:id', name: 'equipo-detalle', component: () => import('@/views/admin/EquipoDetalleView.vue'), props: true, meta: { rol: 'admin', tab: 'equipos' } },
   { path: '/prestamos', name: 'prestamos', component: Pendiente, meta: { rol: 'admin', tab: 'prestamos', titulo: 'Préstamos', icono: 'lista' } },
   { path: '/alumnos', name: 'alumnos', component: Pendiente, meta: { rol: 'admin', tab: 'alumnos', titulo: 'Alumnos', icono: 'alumnos' } },

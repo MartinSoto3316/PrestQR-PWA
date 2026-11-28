@@ -858,3 +858,51 @@ input[readonly]{
         right: 0;
     }
 }
+
+/* ---------- Módulo de equipos: botón de eliminar y etiqueta del QR ---------- */
+.boton-peligro{
+    background-color: var(--tarjeta);
+    border-color: var(--rojo);
+    color: var(--rojo);
+}
+.boton-peligro:hover:not(:disabled){
+    background-color: var(--rojo-fondo);
+}
+a.boton-secundario{
+    color: var(--texto);
+}
+.qr-nombre{
+    font-size: 14px;
+}
+.acciones + .datos{
+    margin-top: 16px;
+}
+
+/* Al imprimir solo sale la etiqueta: QR + código + nombre, de 4 × 4 cm (mínimo recomendado: 3 × 3 cm) */
+@media print{
+    body *{
+        visibility: hidden;
+    }
+    .qr-tarjeta,
+    .qr-tarjeta *{
+        visibility: visible;
+    }
+    .qr-tarjeta{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0.5cm;
+        border: 1px dashed #999999; /* guía para recortar */
+        box-shadow: none;
+    }
+    .qr-imagen{
+        width: 4cm;
+        height: 4cm;
+        padding: 0;
+        border: none;
+    }
+    .qr-ayuda{
+        display: none;
+    }
+}
